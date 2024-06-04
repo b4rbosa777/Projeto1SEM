@@ -4,14 +4,17 @@ body {
     background-color: #f4f4f4;
     display: flex;
     text-align: center;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .sidebar {
     width: 250px;
     background-color: #333;
     color: white;
-    height: 100vh;
-    padding: 20px 1;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
     text-align: initial;
 }
 
@@ -28,7 +31,7 @@ body {
 .sidebar ul li {
     padding: 15px 20px;
     cursor: pointer;
-    margin-bottom: 10px; /* Adicionado para separar os itens */
+    margin-bottom: 10px;
 }
 
 .sidebar ul li:hover {
@@ -38,6 +41,9 @@ body {
 .content {
     flex: 1;
     padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    height: 100vh;
 }
 
 .content-item {
