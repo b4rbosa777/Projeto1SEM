@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
             loadContent(contentPath, contentId);
         });
     });
+
+    // Carregar a tela inicial por padrão
+    loadContent('inicial/inicial', 'inicial');
 });
 
 function loadContent(contentPath, contentId) {

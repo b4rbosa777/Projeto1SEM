@@ -1,0 +1,23 @@
+.materia-content {
+    background-color: #e6ffe6;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.materia-content h2 {
+    color: #228b22;
+}
+
+.materia-content p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.materia-content .additional-content a {
+    color: #32cd32;
+    text-decoration: none;
+}
+
+.materia-content .additional-content a:hover {
+    text-decoration: underline;
+}
