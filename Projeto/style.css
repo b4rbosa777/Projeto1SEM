@@ -1,83 +1,115 @@
+/* Estilos gerais */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-color: #f4f4f4;
+    padding: 0;
     display: flex;
-    text-align: center;
-    height: 100vh;
-    overflow: hidden;
-    
+    flex-direction: column;
 }
 
 .sidebar {
-    width: 250px;
-    background-color: #333;
-    color: white;
-    height: 100%;
+    background-color: #f4f4f4;
     padding: 20px;
+    width: 100%;
     box-sizing: border-box;
-    text-align: initial;
+    text-align: center;
 }
 
 .sidebar h1 {
-    font-family: monospace;
-    text-align: center;
+    font-size: 1.5em;
     margin-bottom: 20px;
 }
 
 .sidebar ul {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
 }
 
 .sidebar ul li {
-    padding: 15px 20px;
-    cursor: pointer;
+    padding: 10px;
     margin-bottom: 10px;
+    background-color: #ddd;
+    cursor: pointer;
 }
 
 .sidebar ul li:hover {
-    background-color: #444;
+    background-color: #ccc;
 }
 
 .content {
-    flex: 1;
     padding: 20px;
+    flex: 1;
+    width: 100%;
     box-sizing: border-box;
-    overflow-y: auto;
-    height: 100vh;
 }
 
-.content-item {
-    display: none;
+#content-container {
+    margin-top: 20px;
 }
 
-.form-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+.logo {
+    display: block;
+    max-width: 150px;
+    height: auto;
+    margin: 0 auto 20px auto; /* centraliza a imagem e adiciona espaço abaixo dela */
 }
 
-.form-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
+/* Estilos para dispositivos maiores */
+@media (min-width: 600px) {
+    body {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        text-align: left;
+    }
+
+    .content {
+        margin-left: 250px;
+        padding: 40px;
+    }
+
+    .sidebar h1 {
+        font-size: 2em;
+    }
+
+    .sidebar ul li {
+        font-size: 1.2em;
+    }
 }
 
-.form-group {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
+/* Backgrounds específicos */
+.background-inicial {
+    background: url('./Inicial/imagem.jpeg') no-repeat center center;
+    background-size: cover;
 }
 
-.form-group label {
-    flex: 1;
-    margin-right: 10px;
+.background-automacao {
+    background: url('imsgrm.jpg') no-repeat center center;
+    background-size: cover;
 }
 
-.form-group input {
-    flex: 2;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.background-desenvolvimento {
+    background: url('path/to/your/desenvolvimento-image.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.background-banco {
+    background: url('path/to/your/banco-image.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.background-linguagem {
+    background: url('path/to/your/linguagem-image.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.background-ciencia {
+    background: url('path/to/your/ciencia-image.jpg') no-repeat center center;
+    background-size: cover;
 }

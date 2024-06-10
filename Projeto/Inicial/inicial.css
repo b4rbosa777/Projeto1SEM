@@ -1,29 +1,28 @@
-/* inicial/inicial.css */
+
 .initial-content {
-    background-image: url('andre.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 20px;
     border-radius: 8px;
     text-align: center;
-    height: 100vh; /* Ajusta a altura para ocupar a tela toda */
+    height: 100vh; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #fff; /* Cor do texto para contrastar com a imagem */
+    color: #fff; 
 }
 
 .initial-content h2 {
     color: #fff;
+    
 }
 
 .initial-content p {
     font-size: 18px;
     line-height: 1.6;
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente para melhor legibilidade */
+    background-color: rgba(0, 0, 0, 0.5); 
     padding: 10px;
     border-radius: 5px;
 }

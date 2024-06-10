@@ -26,6 +26,9 @@ function loadContent(contentPath, contentId) {
 
             // Carregar o CSS específico
             loadCSS(`${contentPath}.css`);
+            
+            // Alterar o fundo do .content
+            updateBackground(contentId);
         })
         .catch(error => {
             console.error('Error loading content:', error);
@@ -45,4 +48,14 @@ function loadCSS(cssPath) {
     link.href = cssPath;
     link.setAttribute('data-dynamic-css', 'true');
     document.head.appendChild(link);
+}
+
+function updateBackground(contentId) {
+    const contentContainer = document.querySelector('.content');
+
+    // Remover classes de fundo antigas
+    contentContainer.className = 'content';
+
+    // Adicionar classe de fundo específica
+    contentContainer.classList.add(`background-${contentId}`);
 }
