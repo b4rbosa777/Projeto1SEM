@@ -28,8 +28,9 @@ body {
 .sidebar ul li {
     padding: 10px;
     margin-bottom: 10px;
-    background-color: #ddd;
+    background-color: #ff0000;
     cursor: pointer;
+    border-radius: 10px;
 }
 
 .sidebar ul li:hover {
@@ -41,6 +42,7 @@ body {
     flex: 1;
     width: 100%;
     box-sizing: border-box;
+   
 }
 
 #content-container {
@@ -81,35 +83,4 @@ body {
     .sidebar ul li {
         font-size: 1.2em;
     }
-}
-
-/* Backgrounds específicos */
-.background-inicial {
-    background: url('./Inicial/imagem.jpeg') no-repeat center center;
-    background-size: cover;
-}
-
-.background-automacao {
-    background: url('imsgrm.jpg') no-repeat center center;
-    background-size: cover;
-}
-
-.background-desenvolvimento {
-    background: url('path/to/your/desenvolvimento-image.jpg') no-repeat center center;
-    background-size: cover;
-}
-
-.background-banco {
-    background: url('path/to/your/banco-image.jpg') no-repeat center center;
-    background-size: cover;
-}
-
-.background-linguagem {
-    background: url('path/to/your/linguagem-image.jpg') no-repeat center center;
-    background-size: cover;
-}
-
-.background-ciencia {
-    background: url('path/to/your/ciencia-image.jpg') no-repeat center center;
-    background-size: cover;
 }

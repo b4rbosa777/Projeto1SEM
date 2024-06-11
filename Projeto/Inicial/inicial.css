@@ -1,28 +1,21 @@
 
 .initial-content {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 8px;
-    text-align: center;
-    height: 100vh; 
+    text-align: center; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #fff; 
+    color: #281f1f; 
 }
 
 .initial-content h2 {
-    color: #fff;
+    color: #0c0c0c;
     
 }
 
 .initial-content p {
     font-size: 18px;
     line-height: 1.6;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.5); 
-    padding: 10px;
-    border-radius: 5px;
+    color: #100f0f;
+
 }
