@@ -49,13 +49,3 @@ function loadCSS(cssPath) {
     link.setAttribute('data-dynamic-css', 'true');
     document.head.appendChild(link);
 }
-
-function updateBackground(contentId) {
-    const contentContainer = document.querySelector('.content');
-
-    // Remover classes de fundo antigas
-    contentContainer.className = 'content';
-
-    // Adicionar classe de fundo específica
-    contentContainer.classList.add(`background-${contentId}`);
-}
