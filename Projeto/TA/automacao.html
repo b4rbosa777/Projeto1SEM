@@ -1,6 +1,318 @@
 <div class="materia-content">
     <h1>Conteúdo de Automação Industrial</h1>
     <p>No Primeiro semestre aprendemos a progamação em c++ no arduino utilizando o Tinkercad </p>
-    <div class="img-arduino"></div>
+    <a href="https://www.tinkercad.com/things/4dfZ0l67lp2-copy-of-semaforo/editel"><div class="img-arduino"></div>
+    </a>
+    <p>Essa foi a primeira atividade do professor Gabriel</p>
+    <div class="container">
+    <div class="img-tinkercad"></div>
+    </div>
+    <p>No Tinkercad, você pode usar o editor de código integrado para programar microcontroladores Arduino usando a linguagem de programação C++. O ambiente de simulação permite conectar componentes eletrônicos virtuais ao Arduino, como LEDs, resistores, sensores e motores, e testar o funcionamento do seu código em tempo real
+    </p>
+    <div class="container">
+        <div class="img-wokwi"></div>
+    </div>
+    
+    <p>Passando um primeiro desafio o professor Gabriel pediu para que fosse programado o displayLCD com as seguintes funçoes:</p>
+
+    <p>Botão verde será o botão de confirmação;
+        Botão vermelho será o botão de cancelamento;
+        Botão azul será o botão de avançar;
+        Botão amarelo será o botão de retornar;
+        
+        Etapa 01 – Realize um sistema onde ao iniciar, o display irá exibir uma tela de bem vindo e mostrar quais opções deverá aparecer, o botão azul avança e o botão amarelo retorna o menu.
+        Criar um menu com as opções e mostrar no LCD.
+        
+        Opção 01: Contar ao Clicar
+        Opção 02: Relógio
+        Opção 03: Zerar Dados
+        
+        Etapa 02 (Contar ao Clicar) : Abre a tela e a cada clique do botão azul soma um ao contador e exibe o valor de contagem na tela junto com um título.
+        Ao clicar no amarelo zera e ao clicar no vermelho, volta a tela inicial.
+        
+        Etapa 03 (Relogio) : Ao abrir o relógio, irá iniciar um relógio começando as 00:00:00, e ele irá ter o seu tempo irá alterar de 1 em 1s. Ao apertar 1x o botão azul o relógio terá 1s valendo 250ms. Ao apertar 1x o botão amarelo, ele volta ao tempo normal. Ao apertar o vermelho, sai do sistema.
+        
+        Etapa 04 (Zerar dados) : Ao abrir essa opção, deverá aparecer uma mensagem na tela mostrando a opção: “Deseja zerar todos os dados?”, se verde for pressionado por + de 3s, zera, se vermelho for pressionado, cancela ação e volta para a tela de menu de opções.</p>
+
+        <textarea name="" id="" cols="30" rows="10"  class="textarea" readonly>
+             c++
+             : #include <LiquidCrystal_I2C.h>
+
+                LiquidCrystal_I2C LCD = LiquidCrystal_I2C(0x27, 16, 2);
+                
+                #define botaoAmarelo 32  
+                #define botaoAzul 33
+                #define botaoVerde 34
+                #define botaoVermelho 35  
+                
+                int cont = 0;
+                bool relogioAlterado = false;
+                int tempoRelogio = 1000; 
+                
+                void setup(){
+                  Serial.begin(115200);
+                  pinMode(botaoAmarelo, INPUT);
+                  pinMode(botaoAzul, INPUT);
+                  pinMode(botaoVerde, INPUT);
+                  pinMode(botaoVermelho, INPUT);
+                  LCD.backlight();
+                  LCD.init();
+                  LCD.setCursor(0, 0);
+                  LCD.print("Bem-vindo!");
+                  delay(2000);
+                  menu();
+                }
+                
+                void loop(){
+                  int botao = lerBotao();
+                  if (botao == botaoAzul) {
+                    avancar();
+                  } else if (botao == botaoAmarelo) {
+                    voltar();
+                  } else if (botao == botaoVerde) {
+                    confirmar();
+                  } else if (botao == botaoVermelho) {
+                    cancelar();
+                  }
+                }
+                
+                void menu() {
+                  LCD.clear();
+                  LCD.setCursor(0, 0);
+                  LCD.print("Menu:");
+                  LCD.setCursor(0, 1);
+                  LCD.print("1. Contar       ");
+                  delay(1500);
+                  LCD.setCursor(0, 1);
+                  LCD.print("2. Relogio      ");
+                  delay(1500);
+                  LCD.setCursor(0, 1);
+                  LCD.print("3. Zerar        ");
+                  delay(1500);
+                  LCD.setCursor(0, 1);
+                  LCD.print("Selecione:");
+                  while (true) {
+                    int botao = lerBotao();
+                    if (botao == botaoAzul) {
+                      avancar();
+                      break;
+                    } else if (botao == botaoAmarelo) {
+                      voltar();
+                      break;
+                    } else if (botao == botaoVerde) {
+                      confirmar();
+                      break;
+                    } else if (botao == botaoVermelho) {
+                      cancelar();
+                      break;
+                    }
+                  }
+                }
+                
+                
+                void avancar() {
+                  int opcao = lerOpcao();
+                  if (opcao == 1) {
+                    contarAoClicar();
+                  } else if (opcao == 2) {
+                    relogio();
+                  } else if (opcao == 3) {
+                    zerarDados();
+                  }
+                }
+                
+                
+                void voltar() {
+                  menu();
+                }
+                
+                void confirmar() {
+                }
+                
+                
+                void cancelar() {
+                  menu();
+                }
+                
+                
+                int lerBotao() {
+                  if (digitalRead(botaoAmarelo) == HIGH) {
+                    delay(100);
+                    return botaoAmarelo;
+                  } else if (digitalRead(botaoAzul) == HIGH) {
+                    delay(200);
+                    return botaoAzul;
+                  } else if (digitalRead(botaoVerde) == HIGH) {
+                    delay(100);
+                    return botaoVerde;
+                  } else if (digitalRead(botaoVermelho) == HIGH) {
+                    return botaoVermelho;
+                  }
+                  return -1;
+                }
+                
+                
+                int lerOpcao() {
+                  int opcao = 1;
+                  while (true) {
+                    LCD.setCursor(0, 1);
+                    if (opcao == 1) {
+                      LCD.print("1. Contar");
+                    } else if (opcao == 2) {
+                      LCD.print("2. Relogio");
+                    } else if (opcao == 3) {
+                      LCD.print("3. Zerar  ");
+                    }
+                    int botao = lerBotao();
+                    if (botao == botaoAzul) {
+                      opcao++;
+                      if (opcao > 3) {
+                        opcao = 1;
+                      }
+                    } else if (botao == botaoAmarelo) {
+                      opcao--;
+                      if (opcao < 1) {
+                        opcao = 3;
+                      }
+                    } else if (botao == botaoVerde) {
+                      return opcao;
+                    } else if (botao == botaoVermelho) {
+                      return -1;
+                    }
+                  }
+                }
+                
+                
+                void contarAoClicar() {
+                  LCD.clear();
+                  LCD.setCursor(0, 0);
+                  LCD.print("Contador:");
+                  LCD.setCursor(0, 1);
+                  LCD.print("Cliques: ");
+                  LCD.print(cont);
+                  while (true) {
+                    int botao = lerBotao();
+                    if (botao == botaoAzul) {
+                      cont++;
+                      LCD.setCursor(0,1);
+                      LCD.print("            ");
+                      LCD.setCursor(0, 1);
+                      LCD.print("Cliques: ");
+                      LCD.print(cont);
+                    } else if (botao == botaoAmarelo) {
+                      cont = 0;
+                      LCD.setCursor(0, 1);
+                      LCD.print("Cliques: ");
+                      LCD.print(cont);
+                    } else if (botao == botaoVermelho) {
+                      menu();
+                      break;
+                    }
+                  }
+                }
+                
+                
+                void relogio() {
+                  LCD.clear();
+                  LCD.setCursor(0, 0);
+                  LCD.print("Relogio:");
+                  int horas = 00;
+                  int minutos = 00;
+                  int segundos = 00;
+                  int tempoRelogio = 1000; 
+                  bool relogioAlterado = false;
+                  while (true) {
+                    LCD.setCursor(0, 1);
+                    LCD.print(horas);
+                    LCD.print(":");
+                    LCD.print(minutos);
+                    LCD.print(":");
+                    LCD.print(segundos);
+                    delay(tempoRelogio);
+                    segundos++;
+                    if (segundos == 60) {
+                      segundos = 00;
+                      minutos++;
+                    }
+                    if (minutos == 60) {
+                      minutos = 00;
+                      horas++;
+                    }
+                    if (horas == 24) {
+                      horas = 00;
+                    }
+                    int botao = lerBotao();
+                    if (botao == botaoAzul) {
+                      if (relogioAlterado) {
+                        tempoRelogio = 1000;
+                      } else {
+                        tempoRelogio = 250;
+                      }
+                      relogioAlterado =!relogioAlterado;
+                    } else if (botao == botaoAmarelo) {
+                      tempoRelogio = 1000;
+                      relogioAlterado = false;
+                    } else if (botao == botaoVermelho) {
+                      menu();
+                      break;
+                    }
+                  }
+                }
+                
+                void zerarDados() {
+                  LCD.clear();
+                  LCD.setCursor(0, 0);
+                  LCD.print("Deseja zerar todos");
+                  LCD.setCursor(0, 1);
+                  LCD.print("os dados?");
+                  int tempoPressionado = 0;
+                  bool botaoVerdePressionado = false;
+                  while (true) {
+                    int botao = lerBotao();
+                    if (botao == botaoVerde) {
+                      botaoVerdePressionado = true;
+                      tempoPressionado = millis();
+                    } else if (botao == botaoVermelho) {
+                      break;
+                    }
+                    if (botaoVerdePressionado && millis() - tempoPressionado > 3000) {
+                      cont = 0;
+                      break;
+                    }
+                  }
+                
+                
+                  menu();
+                }
+                    </textarea>
+    
+        <p>Esse é meu codigo</p>
+
+    <div class="container">
+        <div class="img-C"></div>
+        </div>
+    <p>C++ é a linguagem de programação principal usada no desenvolvimento para a plataforma Arduino, uma das mais populares no campo da eletrônica e do desenvolvimento de protótipos. O Arduino é uma plataforma de código aberto que combina hardware (microcontroladores) e software (IDE e bibliotecas) para facilitar a criação de projetos interativos. Usar C++ no Arduino permite aproveitar os benefícios da programação orientada a objetos e o controle eficiente do hardware.</p>    
+    
+    <p>Um programa em Arduino, conhecido como "sketch", é essencialmente um programa C++ com algumas particularidades. Ele segue uma estrutura específica com duas funções principais: setup() e loop().
+
+        setup(): É executada uma vez quando o programa inicia. Usada para inicializar variáveis, configurar modos de pinos, iniciar bibliotecas, etc.
+        loop(): Contém o código que é executado repetidamente até que o Arduino seja desligado. É onde a lógica principal do programa é colocada.
+        Exemplo de Código em Arduino
+        Aqui está um exemplo simples de um programa Arduino em C++ que pisca um LED conectado ao pino 13:</p>
+    
+    <h3>Bibliotecas</h3>
+    <p>O Arduino IDE vem com uma rica coleção de bibliotecas que facilitam a interação com diversos componentes, como sensores, motores e displays. Você pode incluir bibliotecas em seus sketches para estender a funcionalidade do C++ no Arduino.</p>
+
+    <h3>Funções e Classes</h3>
+    <p>Você pode criar suas próprias funções e classes em C++ para modularizar e organizar melhor seu código. Isso é especialmente útil em projetos maiores e mais complexos.</p>
+
+    <h3>Integração com Tinkercad</h3>
+    <p>O Tinkercad é uma ferramenta online que permite simular circuitos Arduino e escrever código em C++ diretamente no navegador. Isso é extremamente útil para aprendizado e prototipagem rápida sem a necessidade de hardware físico. No Tinkercad, você pode arrastar componentes para o ambiente de simulação, conectar fios e escrever código C++ no editor integrado para ver como seu circuito se comporta em tempo real.</p>
+
+    <h2>Oque aprendi nesses semestre?</h2>
+    <p></p>
+
+    <p>Abaixo está meu GitHub com todas as lições pedidas pelo professor Gabriel.</p>
+
     <button class="redirect-button" onclick="window.location.href='https://github.com/b4rbosa777/Automacao_Industrial'"> GitHub</button>
 </div>

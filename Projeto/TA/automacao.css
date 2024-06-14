@@ -7,17 +7,40 @@
     text-align: center;
     color: hsl(0, 6%, 7%); 
 }
-
-.body, html {
-    height: 100%;
-    margin: 0;
+.container {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;    /* Centraliza verticalmente */
+    height: 50vh;          /* Altura do contêiner pai para fins de exemplo */
 }
+
+
 .img-arduino {
     background: url('industrial.png') no-repeat center center;
     background-size: cover;
-    width: 800px;  /* Ajuste a largura conforme necessário */
+    width: 900px;  /* Ajuste a largura conforme necessário */
     height: 300px; /* Ajuste a altura conforme necessário */
+}
+.img-tinkercad{
+    background:url('tinkercad.png')no-repeat center center;
+    background-size: cover;
+    width: 150px;  /* Ajuste a largura conforme necessário */
+    height: 150px; /* Ajuste a altura conforme necessário */
+
+}
+.img-wokwi{
+    background: url('wokwi.png') no-repeat center center;
+    background-size: cover;
+    width: 900px;  /* Ajuste a largura conforme necessário */
+    height: 300px; /* Ajuste a altura conforme necessário */
+}
+.img-C{
+    background: url('c++.png') no-repeat center center;
+    background-size: cover;
+    width: 300px;  /* Ajuste a largura conforme necessário */
+    height: 300px; /* Ajuste a altura conforme necessário */
+}
+
+.textarea{
+    resize: none;
 }
