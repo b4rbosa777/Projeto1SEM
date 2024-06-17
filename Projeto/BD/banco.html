@@ -1,6 +1,647 @@
 <div class="materia-content">
     <h2>Banco de Dados</h2>
-    <p>Conteúdo de Banco de Dados.</p>
-<img src="test.png"/>
-    <button class="redirect-button" onclick="window.location.href='https://example.com/banco'">GitHub</button>
+    <p>No primeiro semestre em banco de dados utilizamos o PgAdmin4 e a linguagem SQL para aprender.</p>
+    
+    <div class="container">
+        <div class="img-PG"></div>    
+    </div>
+
+    <p>A programação em SQL no pgAdmin 4 oferece uma abordagem poderosa para manipular e gerenciar bancos de dados de forma eficiente. Com o SQL, podemos realizar uma ampla variedade de operações, desde consultas simples até tarefas mais complexas de administração de dados.
+    </p>
+        No pgAdmin 4, uma ferramenta popular para gerenciamento de banco de dados PostgreSQL, podemos escrever consultas SQL diretamente na interface de consulta. Isso nos permite interagir com o banco de dados de forma rápida e intuitiva, executando comandos SQL para recuperar, inserir, atualizar ou excluir dados conforme necessário.
+    </p> 
+        Além das consultas básicas, o SQL no pgAdmin 4 nos permite criar e gerenciar tabelas, definir restrições de integridade, criar visões, escrever procedimentos armazenados e muito mais. Com a linguagem SQL, podemos controlar com precisão a estrutura e o conteúdo do banco de dados, garantindo sua consistência e integridade.
+    </p>    
+        Ao dominar a programação em SQL no pgAdmin 4, podemos realizar análises de dados avançadas, criar relatórios personalizados, automatizar tarefas de rotina e desenvolver aplicativos robustos que atendam às necessidades específicas de negócios.
+    </p>
+        Em resumo, a programação em SQL no pgAdmin 4 é uma habilidade essencial para qualquer desenvolvedor ou administrador de banco de dados que deseja aproveitar ao máximo o poder e a flexibilidade do PostgreSQL. Com conhecimento e prática, podemos utilizar o SQL para criar e gerenciar sistemas de banco de dados eficientes e confiáveis</p>
+
+        <textarea name="" id="" cols="30" rows="10"  class="textarea" readonly> DROP TABLE products;
+
+        DROP TABLE client CASCADE;
+        
+        CREATE TABLE clients (
+            idclient SERIAL PRIMARY KEY,
+            cpf varchar(14),
+            firstname text,
+            lastname text,
+            address text
+        );
+        
+        CREATE TABLE products (
+            idproduct SERIAL PRIMARY KEY,
+            idclient int,
+            CONSTRAINT fk_client FOREIGN KEY (idclient) REFERENCES clients (idclient),
+            productname varchar(50),
+            brand varchar(20),
+            category varchar(20),
+            discount numeric,
+            price numeric
+        );
+        
+        INSERT INTO clients (cpf,firstname,lastname,address) VALUES
+        ('000.000.000-00','Rodrigo','Junior','Rua 00, 000, Bairro 0'),
+        ('111.111.111-11','Joao','Silva','Rua 01, 100, Bairro 1'),
+        ('222.222.222-22','Maria','Gomez','Rua 02, 200, Bairro 2'),
+        ('333.333.333-33','José','Andrade','Rua 03, 300, Bairro 3'),
+        ('444.444.444-44','Bruno','Silveira','Rua 04, 400, Bairro 4'),
+        ('555.555.555-55','Ana','Cabral','Rua 05, 500, Bairro 5'),
+        ('666.666.666-66','Lucia','Silva','Rua 06, 600, Bairro 6'),
+        ('777.777.777-77','Antonio','Mange','Rua 07, 700, Bairro 7'),
+        ('888.888.888-88','Nicolas','Silva','Rua 08, 800, Bairro 8'),
+        ('999.999.999-99','Sandra','Fourlan','Rua 09, 900, Bairro 9');
+        
+        INSERT INTO products (idclient,productname,brand,category,discount,price) VALUES
+        (2,'Headset','jbl','eletronicos',0.1,195.89),
+        (1,'notebook','dell','eletronicos',0.12,3500.00),
+        (10,'cadeira gammer','dragon','imobiliario',0.0,1630.9),
+        (2,'mesa para computador','dragon','imobiliario',0.0,695.89),
+        (1,'mouse','dell','eletronicos',0.12,124.79),
+        (3,'prateleira',null,'imobiliario',0.0,80.9),
+        (5,'postit','faber castel','papelaria',0.02,5.29),
+        (8,'lapiseira','pentel','papelaria',0.02,18.9);
+        
+        ---> Comandos DQL (Data Query Lenguage)
+        
+        --> Vizualizando a tabela clientes
+        SELECT * FROM clients
+        
+        --> Selecionando colunas especificas
+        SELECT firstname,lastname, idclient FROM clients
+        
+        --> Vizualizando a tabela de produtos
+        SELECT * FROM products
+        
+        --> nome do produto, preco e desconto
+        SELECT productname, price, discount,price*discount AS "Desconto em reais" FROM products
+        
+        --> Desafio: exiir o nome do produto, preço e preço com desconto
+        SELECT productname, price, discount,price-price*discount AS "Preço com desconto" FROM products
+        
+        --> Exibe valores sem repetição
+        SELECT DISTINCT brand FROM products
+        
+        --> Calculadora
+        SELECT 2^3
+        
+        --> Funções
+        SELECT random()
+        
+        --> SELECT com clasula WHERE
+        
+        --> Operadores de comparação >,<,>=,<=,=,<> ou !=
+        --> Exibir produtos com valor acima de 100 reais
+        SELECT productname, price FROM products
+        WHERE price>=100
+        
+        
+        --> Operadores lógicos: and, or e not
+        
+        
+        --> Produtos entre 100 e 800 reais
+        SELECT productname, price FROM products
+        WHERE price>=100 AND price<=800
+        --> alternativa
+        SELECT productname, price FROM products
+        WHERE price BETWEEN 100 AND 800
+        
+        --> Produtos cujo preço esteja abaixo de 100 e acima de 800
+        SELECT productname,price FROM products
+        WHERE price<=100 OR price>=800
+        
+        --> DESAFIO: listar todos os produtos da marca dell
+        SELECT productname,brand FROM products
+        WHERE brand = 'dell'
+        
+         --> DESAFIO: listar todoa os produtos comprados por João
+        SELECT productname FROM products
+        WHERE idclient = '2'
+        
+        --> Desafio: listar todos os clientes com id bar
+        SELECT  firstname, idclient FROM clients
+        WHERE idclient %2=0
+        
+        --> Count
+        --> quantos produtos foram vendidos no total?
+        SELECT COUNT (idproduct) FROM products
+        
+        --> função avg (média)
+        --> Qual o preço médio dos produtos vendidos?
+        SELECT AVG (price) FROM products
+        
+        --> funçao max (máximo)
+        --> Qual o maior preço  negociado?
+        SELECT MAX (price) FROM products
+        
+        --> funçao min (minimo)
+        --> Qual o menor preço negociado?
+        SELECT MIN (price) FROM products
+        
+        --> funçao sum (soma)
+        --> Qual valor total vendido?
+        SELECT SUM (price) FROM products
+        
+        --> ORDER BY / DESC
+        SELECT * FROM clients
+        ORDER BY firstname
+        
+        -->Lista de exercicios:
+        
+        --1. Quantos produtos da marca dell foram vendidos?
+        SELECT COUNT (productname) FROM products
+        WHERE brand = 'dell'
+        
+        --2. Quantos produtos João comprou?
+        SELECT COUNT (productname) FROM products
+        WHERE idclient  = '2'
+        
+        --3. Qual o preço médio dos produtos da dell?
+        SELECT AVG (price) FROM products
+        WHERE brand = 'dell'
+        
+        --4. Qual o produto mais caro vendido?
+        SELECT productname,price FROM products
+        WHERE price = (SELECT MAX (price) FROM products)
+        --SELECT MAX (price) FROM products
+        
+        --5. Qual o produto mais barato vendido?
+        SELECT productname,price FROM products
+        WHERE price = (SELECT MIN (price) FROM products)
+        --SELECT MIN (price) FROM products
+        
+        --6. Qual o valor total de equipamentos dell vendidos?
+        SELECT SUM (price) FROM products
+        WHERE brand = 'dell'
+        
+        --7. Quanto Rodrigo já gastou no eCommerce?
+        SELECT SUM (price) FROM products
+        WHERE idclient =(SELECT idclient FROM clients WHERE firstname='Rodrigo')
+        
+        --8. Exiba todos os produtos da catergoria eletronicos ordenados do mais barato para o mais caro.
+        SELECT * FROM products WHERE category = 'eletronicos'
+        ORDER BY price
+        
+        --9. Exiba todos os produtos comprados por Rodrigo ordenados do mais caro para o mais barato.
+        SELECT productname, price FROM products WHERE idclient = '1'
+        ORDER BY price DESC</textarea>
+
+        <p>Como um aprendizado o professor foi montando tabelas com a gente utilizando este código</p>
+
+        <h3>De primeira atividade o professor pediu que fizessemos a lista</h3>
+        <textarea name="" id="" cols="30" rows="10"  class="textarea" readonly>
+            CREATE TABLE livro (
+                isbn SERIAL PRIMARY KEY,
+                titulo VARCHAR(60),
+                editora VARCHAR(50),
+                ano DATE
+            
+            )
+            INSERT INTO livro (titulo, editora, ano) VALUES
+                ('Dom Quixote', 'Companhia das Letras', '1605-01-01'),
+                ('Crime e Castigo', 'Editora 34', '1866-01-01'),
+                ('1984', 'Companhia das Letras', '1949-01-01'),
+                ('O Pequeno Príncipe', 'Agir', '1943-01-01'),
+                ('Orgulho e Preconceito', 'Martin Claret', '1813-01-01'),
+                ('Memórias Póstumas de Brás Cubas', 'Companhia das Letras', '1881-01-01'),
+                ('A Arte da Guerra', 'Cultrix', '500-01-01'),
+                ('O Hobbit', 'WMF Martins Fontes', '1937-01-01'),
+                ('O Senhor dos Anéis: A Sociedade do Anel', 'Martins Fontes', '1954-01-01'),
+                ('Harry Potter e a Pedra Filosofal', 'Rocco', '1997-01-01');
+            
+            CREATE TABLE autores (
+                id_autor SERIAL PRIMARY KEY,
+                autor varchar(100)
+            )
+            INSERT INTO autores (autor) VALUES 
+                ('John Smith'),
+                ('Maria Garcia'),
+                ('Ahmed Khan'),
+                ('Anna Müller'),
+                ('Liu Wei'),
+                ('Sophie Dupont'),
+                ('Alessandro Rossi'),
+                ('Fatima Al-Mansoori'),
+                ('Ivan Petrov'),
+                ('Mei Ling');
+                
+                CREATE TABLE livros_autores (
+                isbn SERIAL,
+                CONSTRAINT fk_isbn FOREIGN KEY (isbn) REFERENCES livro (isbn),
+                id_autor SERIAL,
+                CONSTRAINT fk_id_autor FOREIGN KEY (id_autor) REFERENCES autores (id_autor)
+            )
+
+            </textarea>
+
+
+            <textarea name="" id="" cols="30" rows="10"  class="textarea" readonly>CREATE TABLE alunos (
+                id_aluno SERIAL PRIMARY KEY,
+                nome_aluno varchar(100),
+                data_nasc DATE
+            
+            )
+            INSERT INTO alunos (nome_aluno, data_nasc) VALUES
+            ('João Silva', '2000-03-15'),
+            ('Maria Santos', '1999-07-20'),
+            ('Pedro Oliveira', '2001-01-10'),
+            ('Ana Costa', '1998-12-05'),
+            ('Luiz Pereira', '2002-05-25'),
+            ('Juliana Lima', '2000-09-30'),
+            ('Carlos Fernandes', '1999-04-12'),
+            ('Camila Souza', '2001-11-08'),
+            ('Rafael Martins', '1997-08-18'),
+            ('Mariana Vieira', '2002-02-28');
+            
+            CREATE TABLE curso (
+                id_curso SERIAL PRIMARY KEY,
+                nome_curso varchar(100)
+            
+            )
+            INSERT INTO curso (nome_curso) VALUES
+            ('Engenharia de Software'),
+            ('Administração de Empresas'),
+            ('Medicina'),
+            ('Ciência da Computação'),
+            ('Direito'),
+            ('Arquitetura'),
+            ('Economia'),
+            ('Psicologia'),
+            ('Design Gráfico'),
+            ('Engenharia Civil');
+            
+            CREATE TABLE turmas (
+                id_turma SERIAL PRIMARY KEY,
+                nome_projeto varchar(150),
+                descricao text,
+                id_curso SERIAL,
+                CONSTRAINT fk_curso FOREIGN KEY (id_curso) REFERENCES curso (id_curso)
+            
+            )
+            INSERT INTO turmas (nome_projeto, descricao, id_curso) VALUES
+            ('Projeto A', 'Descrição do Projeto A', 1),
+            ('Projeto B', 'Descrição do Projeto B', 2),
+            ('Projeto C', 'Descrição do Projeto C', 3),
+            ('Projeto D', 'Descrição do Projeto D', 4),
+            ('Projeto E', 'Descrição do Projeto E', 5),
+            ('Projeto F', 'Descrição do Projeto F', 6),
+            ('Projeto G', 'Descrição do Projeto G', 7),
+            ('Projeto H', 'Descrição do Projeto H', 8),
+            ('Projeto I', 'Descrição do Projeto I', 9),
+            ('Projeto J', 'Descrição do Projeto J', 10);
+            
+            CREATE TABLE turma_alunos (
+                id_aluno int,
+                CONSTRAINT fk_aluno FOREIGN KEY (id_aluno) REFERENCES alunos (id_aluno),
+                id_turma int,
+                CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES turmas (id_turma)
+            )</textarea>
+
+            <textarea name="" id="" cols="30" rows="10"  class="textarea" readonly>CREATE TABLE funcionarios(
+                id_func serial PRIMARY KEY,
+                nome_func varchar(100),
+                data_admissao date
+            )
+            INSERT INTO funcionarios (id_func, nome_func, data_admissao) VALUES
+            (1, 'Ana', '2019-08-20'),
+            (2, 'Bernardo', '2016-10-18'),
+            (3, 'Carlos', '2018-02-17'),
+            (4, 'Diego', '2021-05-16'),
+            (5, 'Everaldo', '2015-02-03'),
+            (6, 'Fernanda', '2018-11-12'),
+            (7, 'Gabriel', '2013-12-02'),
+            (8, 'Helen', '2020-09-12'),
+            (9, 'Iago', '2017-11-17'),
+            (10, 'Julio', '2019-08-06');
+            
+            CREATE TABLE projetos(
+                id_projeto serial PRIMARY KEY,
+                nome_projeto varchar(250),
+                descricao text
+            )
+            INSERT INTO projetos (id_projeto, nome_projeto, descricao) VALUES
+            
+            (1, 'SecureNet', ' Desenvolvimento de um sistema de segurança de rede abrangente, incluindo firewall, detecção de intrusão e prevenção de ameaças, para proteger a infraestrutura de TI contra ataques cibernéticos.'),
+            (2, 'DataGuard', 'Implementação de um sistema de backup e recuperação de dados automatizado e altamente confiável, garantindo a integridade e disponibilidade dos dados críticos da empresa em caso de falhas ou desastres.'),
+            (3, 'CloudScape', 'Migração da infraestrutura local para uma arquitetura de nuvem híbrida, aproveitando os benefícios da escalabilidade, flexibilidade e redundância oferecidos pela computação em nuvem.'),
+            (4, 'SmartOffice', 'Implementação de uma solução de Internet das Coisas (IoT) para otimizar o uso de recursos em escritórios, incluindo controle de iluminação, gerenciamento de energia e monitoramento de ocupação de salas.'),
+            (5, 'AgileDevOps', 'Adoção de práticas ágeis e metodologias DevOps para melhorar a colaboração entre equipes de desenvolvimento e operações, acelerando o ciclo de desenvolvimento de software e aumentando a qualidade das entregas.'),
+            (6, 'Virtualize', 'Virtualização de servidores e desktops para consolidar recursos de hardware, reduzir custos operacionais e simplificar a administração de sistemas em ambientes de TI.'),
+            (7, 'MobileFirst', ' Desenvolvimento de uma estratégia centrada em dispositivos móveis para oferecer aos clientes uma experiência otimizada em plataformas móveis, incluindo aplicativos nativos e sites responsivos.'),
+            (8, 'AI-Driven Insights', 'Implementação de soluções baseadas em inteligência artificial e análise de dados para extrair insights valiosos a partir de grandes conjuntos de dados, impulsionando a tomada de decisões informadas na empresa.'),
+            (9, 'NetworkOptimize', 'Avaliação e otimização da infraestrutura de rede existente para melhorar a largura de banda, a confiabilidade e o desempenho, garantindo uma conectividade estável e rápida para todos os usuários e sistemas.'),
+            (10, 'CyberAwareness Training', 'Desenvolvimento e implementação de programas de treinamento em segurança cibernética para conscientizar os funcionários sobre práticas seguras de uso da tecnologia, reduzindo o risco de violações de segurança causadas por erros humanos.');
+            
+            CREATE TABLE funcionarios_projetos (
+                id_func int,
+                CONSTRAINT fk_func FOREIGN KEY (id_func) REFERENCES funcionarios (id_func),
+                id_projeto int,
+                CONSTRAINT fk_proj FOREIGN KEY (id_projeto) REFERENCES projetos (id_projeto)
+            )</textarea>
+
+            <textarea name="" id="" cols="30" rows="10"  class="textarea" readonly>CREATE TABLE paciente (
+                id_paciente SERIAL PRIMARY KEY,
+                nome_paciente varchar(100),
+                data_nasc DATE
+            
+            )
+            INSERT INTO paciente (nome_paciente, data_nasc) VALUES
+            ('João Silva', '1985-03-15'),
+            ('Maria Santos', '1978-07-20'),
+            ('Pedro Oliveira', '1992-01-10'),
+            ('Ana Costa', '1989-12-05'),
+            ('Luiz Pereira', '1980-05-25'),
+            ('Juliana Lima', '1987-09-30'),
+            ('Carlos Fernandes', '1982-04-12'),
+            ('Camila Souza', '1995-11-08'),
+            ('Rafael Martins', '1979-08-18'),
+            ('Mariana Vieira', '1990-02-28');
+            
+            CREATE TABLE medico (
+                id_medico SERIAL PRIMARY KEY,
+                nome_medico varchar(100),
+                especializacao VARCHAR(50)
+            
+            )
+            INSERT INTO medico (nome_medico, especializacao) VALUES
+            ('Dr. João da Silva', 'Cardiologista'),
+            ('Dra. Maria Oliveira', 'Pediatra'),
+            ('Dr. Pedro Santos', 'Ortopedista'),
+            ('Dra. Ana Costa', 'Ginecologista'),
+            ('Dr. Luiz Pereira', 'Dermatologista'),
+            ('Dra. Juliana Lima', 'Psiquiatra'),
+            ('Dr. Carlos Fernandes', 'Cirurgião'),
+            ('Dra. Camila Souza', 'Oftalmologista'),
+            ('Dr. Rafael Martins', 'Urologista'),
+            ('Dra. Mariana Vieira', 'Endocrinologista');
+            
+            CREATE TABLE registro (
+                id_registro SERIAL PRIMARY KEY,
+                nome_projeto varchar(150),
+                data_reg DATE,
+                id_paciente SERIAL,
+                CONSTRAINT fk_paciente FOREIGN KEY (id_paciente) REFERENCES paciente (id_paciente)
+               
+            )
+            ALTER TABLE registro ADD COLUMN id_medico serial
+            ALTER TABLE registro ADD FOREIGN KEY (id_medico) REFERENCES medico(id_medico)
+            
+            INSERT INTO registro (nome_projeto, data_reg, id_paciente) VALUES
+            ('Projeto A', '2023-01-05', 1),
+            ('Projeto B', '2022-11-12', 2),
+            ('Projeto C', '2023-03-20', 3),
+            ('Projeto D', '2022-09-28', 4),
+            ('Projeto E', '2023-02-15', 5),
+            ('Projeto F', '2022-10-30', 6),
+            ('Projeto G', '2022-12-18', 7),
+            ('Projeto H', '2023-01-10', 8),
+            ('Projeto I', '2022-11-25', 9),
+            ('Projeto J', '2023-04-02', 10);
+            </textarea> 
+
+            <textarea name="" id="" cols="30" rows="10"  class="textarea" readonly>CREATE TABLE departamento (
+                id_dep SERIAL PRIMARY KEY,
+                nome_dep varchar(200),
+                gerente varchar(100)
+            
+            
+            )
+            INSERT INTO departamento (nome_dep, gerente) VALUES
+            ('Departamento de Vendas', 'João da Silva'),
+            ('Departamento de Marketing', 'Maria Oliveira'),
+            ('Departamento de Recursos Humanos', 'Pedro Santos'),
+            ('Departamento Financeiro', 'Ana Costa'),
+            ('Departamento de TI', 'Luiz Pereira'),
+            ('Departamento de Logística', 'Juliana Lima'),
+            ('Departamento de Produção', 'Carlos Fernandes'),
+            ('Departamento de Qualidade', 'Camila Souza'),
+            ('Departamento Administrativo', 'Rafael Martins'),
+            ('Departamento de Pesquisa e Desenvolvimento', 'Mariana Vieira');
+            
+            CREATE TABLE funcionarios (
+                id_funcionario SERIAL PRIMARY KEY,
+                nome_func varchar(150),
+                cargo varchar(50),
+                data_adms date,
+                id_dep SERIAL,
+                CONSTRAINT fk_dep FOREIGN KEY (id_dep) REFERENCES departamento (id_dep)
+            )
+            INSERT INTO funcionarios (nome_func, cargo, data_adms, id_dep) VALUES
+            ('Ana Silva', 'Assistente Administrativo', '2022-01-10', 1),
+            ('Carlos Oliveira', 'Analista de Marketing', '2021-05-15', 2),
+            ('Luiza Santos', 'Gerente de Recursos Humanos', '2020-11-20', 3),
+            ('Pedro Costa', 'Analista Financeiro', '2022-03-25', 4),
+            ('Mariana Pereira', 'Desenvolvedor de Software', '2021-09-30', 5),
+            ('José Lima', 'Analista de Logística', '2020-08-12', 6),
+            ('Juliana Fernandes', 'Supervisor de Produção', '2022-02-18', 7),
+            ('Lucas Souza', 'Analista de Qualidade', '2021-07-05', 8),
+            ('Gabriela Martins', 'Secretária Executiva', '2020-12-08', 9),
+            ('Rafaela Vieira', 'Pesquisador', '2021-04-02', 10);                                                                                                                                                                       
+            </textarea>
+
+            <p>Esses sao meus codigos</p>
+
+            <h4>E como uma segunda avaliação o professor pediu que fizessemos a segunda lista que pedia dados de um sistema operacional</h4>
+            <textarea name="" id="" cols="30" rows="10"  class="textarea" readonly>--ddl
+                CREATE TABLE alunos(
+                    cpf int PRIMARY KEY,
+                    nome_aluno VARCHAR (50) not null,
+                    idade int ,
+                    rua text,
+                    numero varchar(10),
+                    bairro varchar(20),
+                    cidade varchar(20),
+                    estado varchar(20),
+                    cep int,
+                    pais varchar(30)
+                )
+                ALTER TABLE alunos ALTER COLUMN
+                cpf type varchar(15)
+                CREATE TABLE telefones (
+                    cpf varchar(15) references alunos,
+                    ddd int,
+                    numero int,
+                    cod_pais int
+                )
+                DROP TABLE telefones CASCADE 
+                CREATE TABLE emails(
+                    cpf varchar (15)REFERENCES alunos,
+                    email varchar (64),
+                    dominio varchar (20)
+                )
+                CREATE TABLE departamentos(
+                    id_dpto serial primary key,
+                    sigla_dpto varchar(4),
+                    nome_dpto varchar (10)
+                )
+                CREATE TABLE cursos(
+                    id_curso serial primary key,
+                    nome_curso varchar (10),
+                    id_dpto serial references departamentos
+                )
+                CREATE TABLE matriculas(
+                    ra serial primary key,
+                    cpf varchar (15) references alunos,
+                    status varchar(10),
+                    id_curso int references cursos
+                )
+                CREATE TABLE disciplinas(
+                    id_disciplina serial primary key,
+                    nome_disciplina varchar (10),	
+                    optativa boolean
+                )
+                CREATE TABLE cursos_disciplinas(
+                    id_curso serial references cursos,
+                    id_disciplinas serial references disciplinas
+                )
+                CREATE TABLE matriculas_disciplinas(
+                    ra serial references matriculas,
+                    id_disciplina serial references disciplinas
+                )
+                --dml
+                INSERT INTO alunos (cpf, nome_aluno, idade, rua, numero, bairro, cidade, estado, cep, pais)
+                VALUES
+                (12345678900, 'João Silva', 25, 'Rua A', '123', 'Centro', 'Cidade A', 'Estado A', 12345678, 'Brasil'),
+                (23456789011, 'Maria Souza', 30, 'Rua B', '456', 'Bairro X', 'Cidade B', 'Estado B', 23456789, 'Brasil'),
+                (34567890122, 'Carlos Oliveira', 20, 'Rua C', '789', 'Bairro Y', 'Cidade C', 'Estado C', 34567890, 'Brasil'),
+                (45678901233, 'Ana Santos', 22, 'Rua D', '1011', 'Bairro Z', 'Cidade D', 'Estado D', 45678901, 'Brasil'),
+                (56789012344, 'Fernanda Costa', 28, 'Rua E', '1213', 'Centro', 'Cidade E', 'Estado E', 56789012, 'Brasil'),
+                (67890123455, 'Paulo Pereira', 24, 'Rua F', '1415', 'Bairro W', 'Cidade F', 'Estado F', 67890123, 'Brasil'),
+                (78901234566, 'Mariana Oliveira', 26, 'Rua G', '1617', 'Bairro V', 'Cidade G', 'Estado G', 78901234, 'Brasil'),
+                (89012345677, 'Pedro Almeida', 29, 'Rua H', '1819', 'Bairro U', 'Cidade H', 'Estado H', 89012345, 'Brasil'),
+                (90123456788, 'Laura Mendes', 27, 'Rua I', '2021', 'Bairro T', 'Cidade I', 'Estado I', 90123456, 'Brasil'),
+                (12345678999, 'Juliana Lima', 23, 'Rua J', '2223', 'Bairro S', 'Cidade J', 'Estado J', 12345678, 'Brasil');
+                INSERT INTO telefones (cpf, ddd, numero, cod_pais)
+                VALUES
+                ('12345678900', 11, 987654321, 55),
+                ('23456789011', 21, 123456789, 55),
+                ('34567890122', 31, 456789012, 55),
+                ('45678901233', 41, 789012345, 55),
+                ('56789012344', 51, 234567890, 55),
+                ('67890123455', 61, 567890123, 55),
+                ('78901234566', 71, 890123456, 55),
+                ('89012345677', 81, 123456789, 55),
+                ('90123456788', 91, 234567890, 55),
+                ('12345678999', 31, 345678901, 55);
+                INSERT INTO emails (cpf, email, dominio)
+                VALUES
+                ('12345678900', 'joao@example.com', 'example.com'),
+                ('23456789011', 'maria@example.com', 'example.com'),
+                ('34567890122', 'carlos@example.com', 'example.com'),
+                ('45678901233', 'ana@example.com', 'example.com'),
+                ('56789012344', 'fernanda@example.com', 'example.com'),
+                ('67890123455', 'paulo@example.com', 'example.com'),
+                ('78901234566', 'mariana@example.com', 'example.com'),
+                ('89012345677', 'pedro@example.com', 'example.com'),
+                ('90123456788', 'laura@example.com', 'example.com'),
+                ('12345678999', 'juliana@example.com', 'example.com');
+                INSERT INTO departamentos (sigla_dpto, nome_dpto)
+                VALUES
+                ('DPT1', 'Dpto 1'),
+                ('DPT2', 'Dpto 2'),
+                ('DPT3', 'Dpto 3'),
+                ('DPT4', 'Dpto 4'),
+                ('DPT5', 'Dpto 5'),
+                ('DPT6', 'Dpto 6'),
+                ('DPT7', 'Dpto 7'),
+                ('DPT8', 'Dpto 8'),
+                ('DPT9', 'Dpto 9'),
+                ('DPT0', 'Dpto 10');
+                INSERT INTO cursos (nome_curso, id_dpto)
+                VALUES
+                ('Curso 1', 1),
+                ('Curso 2', 2),
+                ('Curso 3', 3),
+                ('Curso 4', 4),
+                ('Curso 5', 5),
+                ('Curso 6', 6),
+                ('Curso 7', 7),
+                ('Curso 8', 8),
+                ('Curso 9', 9),
+                ('Curso 10', 10);
+                INSERT INTO matriculas (cpf, status, id_curso)
+                VALUES
+                ('12345678900', 'Ativa', 1),
+                ('23456789011', 'Ativa', 2),
+                ('34567890122', 'Ativa', 3),
+                ('45678901233', 'Ativa', 4),
+                ('56789012344', 'Ativa', 5),
+                ('67890123455', 'Ativa', 6),
+                ('78901234566', 'Ativa', 7),
+                ('89012345677', 'Ativa', 8),
+                ('90123456788', 'Ativa', 9),
+                ('12345678999', 'Ativa', 10);
+                INSERT INTO disciplinas (nome_disciplina, optativa)
+                VALUES
+                ('calculo', FALSE),
+                ('portugues', TRUE),
+                ('ciencias', FALSE),
+                ('historia', TRUE),
+                ('literatura', FALSE),
+                ('quimica', TRUE),
+                ('fisica', FALSE),
+                ('biologia', TRUE),
+                ('matematica', FALSE),
+                ('geo', TRUE);
+                -- Dado o RA ou o Nome do Aluno, buscar no BD todos os demais dados do aluno.
+                SELECT * FROM alunos 
+                WHERE nome_aluno = 'Laura Mendes'
+                
+                -- Dado o nome de um departamento, exibir o nome de todos os cursos associados a ele.
+                SELECT * FROM cursos WHERE id_dpto = '3'
+                
+                --Dado o nome de uma disciplina, exibir a qual ou quais cursos ela pertence.
+                SELECT * FROM cursos_disciplinas INNER JOIN disciplinas ON nome_disciplina= 'matematica'
+                
+                -- Dado o CPF de um aluno, exibir quais disciplinas ele está cursando.
+                SELECT cpf, id_disciplina, nome_disciplina FROM alunos INNER JOIN disciplinas ON cpf = '12345678900'
+                -- Filtrar todos os alunos matriculados em um determinado curso
+                SELECT nome_aluno, cpf, nome_curso FROM alunos INNER JOIN cursos ON nome_curso = 'Curso 1'
+                -- Filtrar todos os alunos matriculados em determinada disciplina
+                SELECT nome_aluno, cpf, nome_disciplina, id_disciplina FROM alunos INNER JOIN disciplinas ON nome_disciplina = 'geo'
+                -- Filtrar alunos formados.
+                SELECT nome_aluno FROM alunos INNER JOIN matriculas on status = 'Ativa'
+                -- Filtrar alunos ativos
+                SELECT nome_aluno FROM alunos INNER JOIN matriculas ON status = 'Ativa'
+                -- Apresentar a quantidade de alunos ativos por curso.
+                SELECT c.nome_curso,
+                       (SELECT COUNT(*)
+                        FROM matriculas m
+                        WHERE m.id_curso = c.id_curso
+                          AND m.status = 'Ativa') AS quantidade_alunos_ativos
+                FROM cursos c;
+                -- Apresentar a quantidade de alunos ativos por disciplina.
+                SELECT d.nome_disciplina, COUNT(md.ra) AS quantidade_alunos
+                FROM disciplinas d
+                LEFT JOIN matriculas_disciplinas md ON d.id_disciplina = md.id_disciplina
+                LEFT JOIN matriculas m ON md.ra = m.ra
+                WHERE m.status = 'Ativa'
+                GROUP BY d.nome_disciplina;
+                INSERT INTO matriculas_disciplinas (ra, id_disciplina)
+                VALUES
+                (1, 1),
+                (2, 2),
+                (3, 3),
+                (4, 4),
+                (5, 5),
+                (6, 6),
+                (7, 7),
+                (8, 8),
+                (9, 9),
+                (10, 10);</textarea>
+
+                <h2>Oque aprendi nesse semestre?</h2>
+
+                <p>No decorrer deste semestre, obtive uma compreensão fundamental dos conceitos básicos em SQL (Structured Query Language), incluindo DDL (Data Definition Language), DML (Data Manipulation Language) e DQL (Data Query Language). Essas áreas essenciais da linguagem SQL são fundamentais para a interação eficaz com bancos de dados relacionais.
+                </p>
+                    Com o DDL, aprendi a definir a estrutura do banco de dados, criando tabelas, especificando chaves primárias, restrições de integridade e outros elementos essenciais para organizar os dados de forma coerente. Isso proporcionou uma base sólida para a criação e manutenção de esquemas de banco de dados bem estruturados.
+                </p>    
+                    No que diz respeito ao DML, adquiri habilidades para manipular dados dentro do banco de dados, executando operações como inserção, atualização, exclusão e recuperação de registros. Essas operações são fundamentais para a gestão eficaz dos dados e para garantir a consistência e integridade das informações armazenadas.
+                </p>    
+                    Por fim, com o DQL, aprendi a formular consultas SQL para recuperar dados específicos de um banco de dados. Essas consultas permitem extrair informações relevantes para análise, relatórios e tomada de decisões, desempenhando um papel crucial na obtenção de insights valiosos a partir dos dados armazenados.
+                </p>    
+                    No geral, a compreensão do básico em SQL DDL, DML e DQL neste semestre proporcionou uma base sólida para explorar ainda mais os recursos avançados da linguagem SQL e para aplicar esses conhecimentos em projetos futuros envolvendo bancos de dados relacionais</p>
+
+                    <h3>Abaixo está meu GitHub com todas as lições pedidas pelo professor Cainã</h3>            
+
+    <button class="redirect-button" onclick="window.location.href='https://github.com/b4rbosa777/Li-oBD.git'">GitHub</button>
 </div>

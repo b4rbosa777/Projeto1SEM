@@ -7,3 +7,24 @@
     text-align: center;
     color: #131111; 
 }
+
+.container {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;    /* Centraliza verticalmente */
+    height: 20vh;          /* Altura do contêiner pai para fins de exemplo */
+}
+
+.img-colab {
+    background: url('colab.png') no-repeat center center;
+    background-size: cover;
+    width: 100px;  /* Ajuste a largura conforme necessário */
+    height: 100px; /* Ajuste a altura conforme necessário */
+}
+
+.img-python {
+    background: url('python.png') no-repeat center center;
+    background-size: cover;
+    width: 100px;  /* Ajuste a largura conforme necessário */
+    height: 100px; /* Ajuste a altura conforme necessário */
+}

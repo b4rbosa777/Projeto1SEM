@@ -8,3 +8,65 @@
     text-align: center;
     color: #131111; 
 }
+.container {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;    /* Centraliza verticalmente */
+    height: 50vh;          /* Altura do contêiner pai para fins de exemplo */
+}
+
+.img-Lista1 {
+    background: url('1Lista.png') no-repeat center center;
+    background-size: cover;
+    width: 600px;  /* Ajuste a largura conforme necessário */
+    height: 300px; /* Ajuste a altura conforme necessário */
+    
+}
+
+.img-Lista2 {
+    background: url('2Lista.png') no-repeat center center;
+    background-size: cover;
+    width: 600px;  /* Ajuste a largura conforme necessário */
+    height: 300px; /* Ajuste a altura conforme necessário */
+    
+}
+
+.img-Lista3 {
+    background: url('3Lista.png') no-repeat center center;
+    background-size: cover;
+    width: 600px;  /* Ajuste a largura conforme necessário */
+    height: 300px; /* Ajuste a altura conforme necessário */
+    
+}
+
+.img-Lista4 {
+    background: url('4Lista.png') no-repeat center center;
+    background-size: cover;
+    width: 600px;  /* Ajuste a largura conforme necessário */
+    height: 300px; /* Ajuste a altura conforme necessário */
+    
+}
+
+.img-Lista5 {
+    background: url('5Lista.png') no-repeat center center;
+    background-size: cover;
+    width: 600px;  /* Ajuste a largura conforme necessário */
+    height: 300px; /* Ajuste a altura conforme necessário */
+    
+}
+
+.img-Lista6 {
+    background: url('6Lista.png') no-repeat center center;
+    background-size: cover;
+    width: 600px;  /* Ajuste a largura conforme necessário */
+    height: 300px; /* Ajuste a altura conforme necessário */
+    
+}
+
+.img-Screensaver {
+    background: url('Screensaver.png') no-repeat center center;
+    background-size: cover;
+    width: 600px;  /* Ajuste a largura conforme necessário */
+    height: 300px; /* Ajuste a altura conforme necessário */
+    
+}

@@ -7,3 +7,25 @@
     text-align: center;
     color: #131111; 
 }
+
+.container {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;    /* Centraliza verticalmente */
+    height: 30vh;          /* Altura do contêiner pai para fins de exemplo */
+}
+
+.img-PG {
+    background: url('PgAdm.png') no-repeat center center;
+    background-size: cover;
+    width: 100px;  /* Ajuste a largura conforme necessário */
+    height: 100px; /* Ajuste a altura conforme necessário */
+    
+}
+
+.textarea{
+    
+    resize: none;
+    width: 700px;
+    height: 150px;
+}

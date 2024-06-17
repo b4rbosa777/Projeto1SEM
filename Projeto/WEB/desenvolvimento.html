@@ -1,6 +1,153 @@
 <div class="materia-content">
     <h2>Desenvolvimento Web</h2>
-    <p>Conteúdo de Desenvolvimento Web.</p>
+    <p>No Primeiro semestre aprendemos a programar web em html5, css e javascript utilizamos o VSCode como aplicativo </p>
+
+    <div class="container">
+        <div class="img-HTML"></div>
+        </div>
+
+        <p>HTML (Hypertext Markup Language):HTML, ou Linguagem de Marcação de Hipertexto, é a espinha dorsal da web. Ele fornece a estrutura básica para criar páginas da web, permitindo definir o conteúdo e a organização do documento. Por meio de tags (ou elementos), como html, head, body, div, p, h1, entre outras, podemos criar diferentes tipos de elementos, como parágrafos, títulos, imagens, links e listas. O HTML é uma linguagem de marcação bastante simples e fácil de aprender, sendo essencial para qualquer desenvolvedor web.</p>
+
+
+    <div class="container">
+        <div class="img-CSS"></div>
+        </div>    
+
+        <p>CSS (Cascading Style Sheets):
+            CSS, ou Folhas de Estilo em Cascata, é uma linguagem utilizada para estilizar documentos HTML e controlar sua apresentação visual. Com o CSS, podemos definir cores, fontes, espaçamentos, tamanhos e layouts para os elementos HTML, tornando as páginas da web mais atraentes e consistentes. Utilizando seletores e propriedades, podemos aplicar estilos de forma seletiva a diferentes partes do documento, garantindo uma aparência visual coesa e agradável para os usuários. O CSS é uma parte fundamental do desenvolvimento web moderno, permitindo criar designs responsivos e esteticamente atraentes.</p>
+
+     <div class="container">
+        <div class="img-JS"></div>
+        </div>        
+
+        <p>JavaScript:
+            JavaScript é uma linguagem de programação de alto nível, interpretada e dinâmica, amplamente utilizada para criar interatividade em páginas da web. Com o JavaScript, podemos adicionar comportamentos dinâmicos às nossas páginas, como validação de formulários, animações, manipulação do DOM (Document Object Model), requisições assíncronas (AJAX), entre outros. Ele é suportado por todos os principais navegadores web e possui uma vasta biblioteca de frameworks e ferramentas para facilitar o desenvolvimento. JavaScript é uma das linguagens mais importantes no desenvolvimento web moderno, permitindo criar experiências interativas e ricas para os usuários.</p>
+
+
+    <h3>Como uma atividade para auxiliar na linguaguem html o professor pediu para que fosse feito uma calculadora.</h3>
+
+    <div class="container">
+        <div class="img-calculadora"></div>
+        </div>
+
+        <h3>tambem passou como atividade avaliativa um formulário</h3>
+
+<textarea name="" id="" cols="30" rows="10"  class="textarea" readonly><!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formulário</title>
+        <script>
+            // Função para adicionar uma entrada à tabela
+            function addEntry() {
+                var name = document.getElementById("nameInput").value;
+                var email = document.getElementById("emailInput").value;
+                var phone = document.getElementById("phoneInput").value;
+                var table = document.getElementById("tableBody");
+                var newRow = table.insertRow(-1);
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                var cell3 = newRow.insertCell(2);
+                var cell4 = newRow.insertCell(3);
+                var cell5 = newRow.insertCell(4);
+                var cell6 = newRow.insertCell(5);
+                cell1.innerHTML = table.rows.length - 1;
+                cell2.innerHTML = name;
+                cell3.innerHTML = email;
+                cell4.innerHTML = phone;
+                cell5.innerHTML = '<button onclick="deleteEntry(this)">Deletar</button>';
+                cell6.innerHTML = '<button onclick="openEditPopup(this)">Editar</button>';
+                document.getElementById("myForm").reset();
+            }
+    
+            // Função para deletar uma entrada da tabela
+            function deleteEntry(row) {
+                var i = row.parentNode.parentNode.rowIndex;
+                document.getElementById("dataTable").deleteRow(i);
+            }
+    
+            // Função para abrir o popup de edição
+            function openEditPopup(row) {
+                var i = row.parentNode.parentNode.rowIndex;
+                var cells = document.getElementById("dataTable").rows[i].cells;
+                document.getElementById("editIdInput").value = cells[0].innerHTML;
+                document.getElementById("editedNameInput").value = cells[1].innerHTML;
+                document.getElementById("editedEmailInput").value = cells[2].innerHTML;
+                document.getElementById("editedPhoneInput").value = cells[3].innerHTML;
+                document.getElementById("editPopup").style.display = "block";
+            }
+    
+            // Função para salvar a edição
+            function saveEdit() {
+                var id = document.getElementById("editIdInput").value;
+                var name = document.getElementById("editedNameInput").value;
+                var email = document.getElementById("editedEmailInput").value;
+                var phone = document.getElementById("editedPhoneInput").value;
+                var table = document.getElementById("tableBody");
+                var row = table.rows[id];
+                row.cells[1].innerHTML = name;
+                row.cells[2].innerHTML = email;
+                row.cells[3].innerHTML = phone;
+                document.getElementById("editPopup").style.display = "none";
+            }
+    
+            // Função para fechar o popup de edição
+            function closeEditPopup() {
+                document.getElementById("editPopup").style.display = "none";
+            }
+        </script>
+    </head>
+    <body>
+        <form id="myForm">
+            <input type="text" id="nameInput" placeholder="NOME:">
+            <input type="email" id="emailInput" placeholder="EMAIL">
+            <input type="text" id="phoneInput" placeholder="TELEFONE">
+            <button type="button" onclick="addEntry()">CADASTRAR</button>
+        </form>
+    
+        <table border="1" id="dataTable">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Deletar</th>
+                    <th>Editar</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Entries will be dynamically added here -->
+            </tbody>
+        </table>
+    
+        <div id="editPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 1px solid black;">
+            <h2>Editar Pessoa</h2>
+            <input type="hidden" id="editIdInput" value="">
+            <input type="text" id="editedNameInput" placeholder="NOME:">
+            <input type="email" id="editedEmailInput" placeholder="EMAIL">
+            <input type="text" id="editedPhoneInput" placeholder="TELEFONE">
+            <button type="button" onclick="saveEdit()">Salvar</button>
+            <button type="button" onclick="closeEditPopup()">Cancelar</button>
+        </div>
+    </body>
+    </html>
+    </textarea>
+
+    <p>Assim ficou meu código</p>
+
+    <h3>tambem aprendemos a arvore DOM</h3>
+
+    <p>A Árvore DOM (Document Object Model) é uma estrutura de árvore hierárquica que representa a estrutura de um documento HTML ou XML. Cada elemento na página web, como tags HTML, texto e atributos, é representado por um nó na árvore DOM. A estrutura é organizada de forma que cada nó tenha um pai e possa ter zero ou mais filhos, formando uma hierarquia.
+    </p>
+        Através da Árvore DOM, os navegadores web conseguem interpretar e manipular o conteúdo de uma página web. Ela é essencial para o desenvolvimento de aplicações web dinâmicas, pois permite que os desenvolvedores acessem e modifiquem os elementos da página usando linguagens de programação como JavaScript.
+    </p>        
+        Em resumo, a Árvore DOM é uma representação estruturada e hierárquica do conteúdo de um documento HTML ou XML, sendo fundamental para a interatividade e manipulação dinâmica de páginas web</p>
+
+    <h3>Oque aprendi nesse semestre?</h3>
+    <p>Durante este semestre, mergulhei de cabeça no vasto mundo do desenvolvimento web front-end, explorando meticulosamente os pilares fundamentais: HTML, CSS e JavaScript. Através do HTML, pude compreender a essência da estruturação semântica do conteúdo web, aprendendo a criar páginas que não apenas exibem informações, mas também comunicam significado. Com o CSS, mergulhei em um oceano de possibilidades estéticas, aprendendo a estilizar elementos de maneira elegante e atraente, transformando layouts comuns em experiências visuais cativantes. E com o JavaScript, adentrei no reino da interatividade, descobrindo como dar vida às páginas web através de animações, validações de formulários e manipulação dinâmica do conteúdo. No entanto, devo admitir que meu conhecimento ainda está em estágio inicial. A cada linha de código escrita, percebo o vasto universo de possibilidades que ainda tenho para explorar e dominar. Mesmo assim, estou entusiasmado com o progresso que já alcancei e motivado a continuar a jornada de aprendizado, rumo a um domínio mais sólido e confiante das ferramentas e técnicas do desenvolvimento web</p>
+
     <button class="redirect-button" onclick="window.location.href='https://example.com/automacao'">GitHub
     </button>
 </div>

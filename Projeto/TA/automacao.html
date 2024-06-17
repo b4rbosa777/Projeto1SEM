@@ -4,6 +4,90 @@
     <a href="https://www.tinkercad.com/things/4dfZ0l67lp2-copy-of-semaforo/editel"><div class="img-arduino"></div>
     </a>
     <p>Essa foi a primeira atividade do professor Gabriel</p>
+    <p>Nesse primeiro exercicio aprendemos as principais funções do arduino:</p>
+    <h1>funções basicas</h1>
+
+    <p>void setup() {
+      // Inicialização de variáveis, pinos, etc.
+  }
+  </p>
+
+  <p>void loop() {
+    // Código principal a ser executado repetidamente
+}
+</p>
+
+  <h1>Funções de Controle de Fluxo</h1>
+
+  <p>if (condição) {
+    // código a ser executado se condição for verdadeira
+} else if (outraCondição) {
+    // código a ser executado se outraCondição for verdadeira
+} else {
+    // código a ser executado se nenhuma condição anterior for verdadeira
+}
+
+</p>
+  <p>for (int i = 0; i < 10; i++) {
+    // código a ser executado 10 vezes
+}
+
+</p>
+  <p>while (condição) {
+    // código a ser executado enquanto condição for verdadeira
+}
+</p>
+
+  <p>do {
+    // código a ser executado pelo menos uma vez e repetidamente enquanto condição for verdadeira
+} while (condição);
+</p>
+
+  <h1>Funções de Tempo</h1>
+
+  <p>delay(1000); 
+    // pausa por 1000 milissegundos (1 segundo)
+</p>
+
+  <p>unsigned long tempo = millis();
+  </p>
+
+  <p>pinMode(13, OUTPUT); 
+    // configura o pino 13 como saída
+  </p>
+
+  <p>digitalWrite(13, HIGH); 
+    // define o pino 13 como alto
+</p>
+
+  <p>int valor = digitalRead(2); 
+    // lê o valor do pino 2
+  </p>
+
+  <p>analogWrite(5, 128); 
+    // escreve um valor PWM de 128 no pino 5
+  </p>
+
+  <p>int valor = analogRead(A0); 
+    // lê o valor do pino analógico A0
+</p>
+
+  <h1>Funções de Comunicação</h1>
+
+
+  <p>Serial.begin(9600);
+     // inicia a comunicação serial a 9600 baud
+  </p>
+
+  <p>Serial.print("Hello, world!"); 
+    // envia "Hello, world!" para a porta serial
+</p>
+
+  <p>Serial.println("Hello, world!"); 
+    // envia "Hello, world!" e pula para a linha seguinte na porta serial
+  </p>
+
+
     <div class="container">
     <div class="img-tinkercad"></div>
     </div>
@@ -19,19 +103,23 @@
         Botão vermelho será o botão de cancelamento;
         Botão azul será o botão de avançar;
         Botão amarelo será o botão de retornar;
-        
+      </p>
+      
+        <p> 
         Etapa 01 – Realize um sistema onde ao iniciar, o display irá exibir uma tela de bem vindo e mostrar quais opções deverá aparecer, o botão azul avança e o botão amarelo retorna o menu.
         Criar um menu com as opções e mostrar no LCD.
-        
+      </p>
         Opção 01: Contar ao Clicar
         Opção 02: Relógio
         Opção 03: Zerar Dados
-        
+       <p> 
         Etapa 02 (Contar ao Clicar) : Abre a tela e a cada clique do botão azul soma um ao contador e exibe o valor de contagem na tela junto com um título.
         Ao clicar no amarelo zera e ao clicar no vermelho, volta a tela inicial.
-        
+      </p>
+       
+        <p>
         Etapa 03 (Relogio) : Ao abrir o relógio, irá iniciar um relógio começando as 00:00:00, e ele irá ter o seu tempo irá alterar de 1 em 1s. Ao apertar 1x o botão azul o relógio terá 1s valendo 250ms. Ao apertar 1x o botão amarelo, ele volta ao tempo normal. Ao apertar o vermelho, sai do sistema.
-        
+      </p>
         Etapa 04 (Zerar dados) : Ao abrir essa opção, deverá aparecer uma mensagem na tela mostrando a opção: “Deseja zerar todos os dados?”, se verde for pressionado por + de 3s, zera, se vermelho for pressionado, cancela ação e volta para a tela de menu de opções.</p>
 
         <textarea name="" id="" cols="30" rows="10"  class="textarea" readonly>
@@ -309,10 +397,24 @@
     <h3>Integração com Tinkercad</h3>
     <p>O Tinkercad é uma ferramenta online que permite simular circuitos Arduino e escrever código em C++ diretamente no navegador. Isso é extremamente útil para aprendizado e prototipagem rápida sem a necessidade de hardware físico. No Tinkercad, você pode arrastar componentes para o ambiente de simulação, conectar fios e escrever código C++ no editor integrado para ver como seu circuito se comporta em tempo real.</p>
 
-    <h2>Oque aprendi nesses semestre?</h2>
-    <p></p>
+    <h2>Oque aprendi nesse semestre?</h2>
 
-    <p>Abaixo está meu GitHub com todas as lições pedidas pelo professor Gabriel.</p>
+    <p>Durante o semestre, tive a oportunidade de aprender e explorar as funções básicas do Arduino e a utilização de displays LCD. Comecei entendendo a estrutura básica de um sketch, que consiste nas funções setup() e loop(). Compreendi como inicializar pinos e configurar modos através de pinMode(), além de manipular entradas e saídas digitais com digitalWrite() e digitalRead(). Também aprendi a controlar saídas analógicas utilizando analogWrite() e a ler entradas analógicas com analogRead().</p>
+
+    <p>Além das funções básicas de controle de fluxo, como if, for, while e do...while, também explorei a importância das funções de temporização, como delay() e millis(), que são essenciais para criar pausas e medir o tempo de execução.</p>
+
+    <p>No campo da comunicação, aprendi a inicializar a comunicação serial com Serial.begin(), e a enviar e receber dados através das funções Serial.print() e Serial.println(). Isso foi crucial para a depuração e monitoramento do comportamento do Arduino.</p>
+
+
+    <p>Um dos pontos altos foi aprender a usar displays LCD com o Arduino. Entendi como conectar e configurar o display, e utilizei bibliotecas como LiquidCrystal para exibir texto. Aprendi a inicializar o display, definir o número de colunas e linhas, e a usar comandos como lcd.print() e lcd.setCursor() para controlar o que é exibido.</p>
+
+      <p>Esse semestre me proporcionou uma base sólida em eletrônica e programação com Arduino, permitindo-me criar projetos interativos e funcionais,espero melhorar e ter um maior conhecimento nessa área.
+      
+      </p>
+
+
+
+    <h3>Abaixo está meu GitHub com todas as lições pedidas pelo professor Gabriel.</h3>
 
     <button class="redirect-button" onclick="window.location.href='https://github.com/b4rbosa777/Automacao_Industrial'"> GitHub</button>
 </div>
